@@ -114,5 +114,14 @@ public class FeaturesUtilsTest {
     			"http://s4.pir.fm/pf/blog/articles/How-to-copy-a-web-page-link-or-URL-1800x980.pdf";
     	Assert.assertEquals(FeaturesUtils.numberOfImageAsURL(text), 3);
     }
+    
+    @Test
+    public void matchDomainSender(){
+    	String from = "Robert Elz <kre@munnari.OZ.AU>";
+    	String messageId = "<13258.1030015585@munnari.OZ.AU>";
+    	Assert.assertTrue(FeaturesUtils.matchDomainSender(from, messageId));
+    	from = "Robert Elz <kre@munnari.ZZ.AU>";
+    	Assert.assertFalse(FeaturesUtils.matchDomainSender(from, messageId));
+    }
 
 }

@@ -17,36 +17,44 @@ import com.jcano.phishing.features.utils.FeaturesUtils;
 
 public class ContentHandler extends AbstractContentHandler {
 	
-	private Features features = new Features();
+	private final static String FROM = "From";
 	
-    public void startHeader() throws MimeException {
-    	//System.out.println("Reading Header...");
-    }
+	private final static String MESSAGE_ID = "Message-Id";
+	
+	private String from;
+	
+	private String messageId;
+	
+	private Features features = new Features();
     
     public void endHeader() throws MimeException {
-    	//System.out.println("Done");
+    	features.setDomainSender(FeaturesUtils.matchDomainSender(from, messageId));
     }
     
     public void field(Field field) throws MimeException {
-    	// System.out.println(field.getName());
-    	// System.out.println("	" + field.getBody());
+    	if(field.getName().equalsIgnoreCase(FROM)) {
+    		this.from = field.getBody();
+    	}
+    	if(field.getName().equalsIgnoreCase(MESSAGE_ID)) {
+    		this.messageId = field.getBody();
+    	}
     }
 	
 	public void body(BodyDescriptor bd, InputStream is)
             throws MimeException, IOException {
-		//System.out.println("Reading  Body...");
 		
         String bodyStr = new BufferedReader(
         	      new InputStreamReader(is, StandardCharsets.UTF_8))
         	        .lines()
         	        .collect(Collectors.joining("\n"));
         features.setHtmlBody(FeaturesUtils.hasHTMLTags(bodyStr));
+        features.setScriptTag(FeaturesUtils.hasScriptTag(bodyStr));
+        features.setHexadecimalURLs(FeaturesUtils.getNumberOfUrlsWithHexaChars(FeaturesUtils.getURLs(bodyStr)));
         features.setAccountTerm(FeaturesUtils.isTerm(FeaturesUtils.ACCOUNT, bodyStr));
         features.setAgreeTerm(FeaturesUtils.isTerm(FeaturesUtils.AGREE, bodyStr));
         features.setDearTeam(FeaturesUtils.isTerm(FeaturesUtils.DEAR, bodyStr));
         features.setDomainsCount(0);
         features.setDotsCount(0);
-        features.setHexadecimalURLs(0);
         features.setImagesAsURL(FeaturesUtils.numberOfImageAsURL(bodyStr));
         features.setLoginTerm(FeaturesUtils.isTerm(FeaturesUtils.LOGIN, bodyStr));
         features.setPayPalTerm(FeaturesUtils.isTerm(FeaturesUtils.PAYPAL, bodyStr));

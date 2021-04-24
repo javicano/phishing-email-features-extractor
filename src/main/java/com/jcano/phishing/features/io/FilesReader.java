@@ -21,7 +21,6 @@ public class FilesReader {
 		File[] listOfFiles = folder.listFiles();
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
-		    	//System.out.println("Reading file " + file.getName());
 				try {
 					Features features = emailParser.getEmailFeatures(file.getPath());
 					features.setPhishing(isPhishing);
@@ -35,7 +34,6 @@ public class FilesReader {
 				}
 		    	
 		    } else if(file.isDirectory()) {
-		    	//System.out.println("Reading sub-directory " + file.getName());
 		    	this.readCollection(file.getPath(), isPhishing);
 		    }
 		}

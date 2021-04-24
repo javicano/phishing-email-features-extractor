@@ -2,10 +2,18 @@ package com.jcano.phishing.features;
 
 public class Features {
 	
+	private final static int NUMBER_OF_ATTRIBUTES = 19;
+	
 	/**
 	 * Checks if the email body contains HTML content.
 	 */
 	private boolean htmlBody;
+	
+	
+	/**
+	 * Checks if the email body contains javascript script tag.
+	 */
+	private boolean scriptTag;
 	
 	/**
 	 * The number of URLs consisting of hexadecimal characters in the email.
@@ -88,6 +96,11 @@ public class Features {
 	 * the sum of weights of the phishing terms that exists in that email
 	 */
 	private int phishingTermsWeight;
+	
+	/**
+	 * 
+	 */
+	private boolean domainSender;
 
 	public boolean isHtmlBody() {
 		return htmlBody;
@@ -95,6 +108,14 @@ public class Features {
 
 	public void setHtmlBody(boolean htmlBody) {
 		this.htmlBody = htmlBody;
+	}
+	
+	public boolean isScriptTag() {
+		return scriptTag;
+	}
+
+	public void setScriptTag(boolean scriptTag) {
+		this.scriptTag = scriptTag;
 	}
 
 	public int getHexadecimalURLs() {
@@ -225,64 +246,78 @@ public class Features {
 		this.isPhishing = isPhishing;
 	}
 	
+	public boolean isDomainSender() {
+		return domainSender;
+	}
+
+	public void setDomainSender(boolean domainSender) {
+		this.domainSender = domainSender;
+	}
+	
 	public String[] fieldNames() {
-		String[] fieldNames = new String[17];
+		String[] fieldNames = new String[NUMBER_OF_ATTRIBUTES];
 		fieldNames[0] = "htmlBody";
-		fieldNames[1] = "hexadecimalURLs";
-		fieldNames[2] = "domainsCount";
-		fieldNames[3] = "textLinkDifference";
-		fieldNames[4] = "dotsCount";
-		fieldNames[5] = "isAccountTerm";
-		fieldNames[6] = "isDearTeam";
-		fieldNames[7] = "imagesAsURL";
-		fieldNames[8] = "ipUrls";
-		fieldNames[9] = "isPayPalTerm";
-		fieldNames[10] = "isLoginTerm";
-		fieldNames[11] = "isBankTerm";
-		fieldNames[12] = "isVerifyTerm";
-		fieldNames[13] = "isAgreeTerm";
-		fieldNames[14] = "isSuspendTerm";
-		fieldNames[15] = "phishingTermsWeight";
-		fieldNames[16] = "isPhishing";
+		fieldNames[1] = "scriptTag";
+		fieldNames[2] = "hexadecimalURLs";
+		fieldNames[3] = "domainsCount";
+		fieldNames[4] = "textLinkDifference";
+		fieldNames[5] = "dotsCount";
+		fieldNames[6] = "isAccountTerm";
+		fieldNames[7] = "isDearTeam";
+		fieldNames[8] = "imagesAsURL";
+		fieldNames[9] = "ipUrls";
+		fieldNames[10] = "isPayPalTerm";
+		fieldNames[11] = "isLoginTerm";
+		fieldNames[12] = "isBankTerm";
+		fieldNames[13] = "isVerifyTerm";
+		fieldNames[14] = "isAgreeTerm";
+		fieldNames[15] = "isSuspendTerm";
+		fieldNames[16] = "phishingTermsWeight";
+		fieldNames[17] = "domainSender";
+		fieldNames[18] = "isPhishing";
 		return fieldNames;
 	}
 	
 	public String[] toArray() {
-		String[] featuresArr = new String[17];
+		String[] featuresArr = new String[NUMBER_OF_ATTRIBUTES];
 		// htmlBody
 		featuresArr[0] = this.htmlBody ? "1" : "0";
+		// scriptTag
+		featuresArr[1] = this.scriptTag ? "1" : "0";
 		// hexadecimalURLs
-		featuresArr[1] = String.valueOf(this.hexadecimalURLs);
+		featuresArr[2] = String.valueOf(this.hexadecimalURLs);
 		// domainsCount
-		featuresArr[2] = String.valueOf(this.domainsCount);
+		featuresArr[3] = String.valueOf(this.domainsCount);
 		// textLinkDifference
-		featuresArr[3] = String.valueOf(this.textLinkDifference);
+		featuresArr[4] = String.valueOf(this.textLinkDifference);
 		// dotsCount
-		featuresArr[4] = String.valueOf(this.dotsCount);
+		featuresArr[5] = String.valueOf(this.dotsCount);
 		// isAccountTerm
-		featuresArr[5] = this.isAccountTerm ? "1" : "0";
+		featuresArr[6] = this.isAccountTerm ? "1" : "0";
 		// isDearTeam
-		featuresArr[6] = this.isDearTeam ? "1" : "0";
+		featuresArr[7] = this.isDearTeam ? "1" : "0";
 		// imagesAsURL
-		featuresArr[7] = String.valueOf(this.imagesAsURL);
+		featuresArr[8] = String.valueOf(this.imagesAsURL);
 		// ipUrls
-		featuresArr[8] = String.valueOf(this.ipUrls);
+		featuresArr[9] = String.valueOf(this.ipUrls);
 		// isPayPalTerm
-		featuresArr[9] = this.isPayPalTerm ? "1" : "0";
+		featuresArr[10] = this.isPayPalTerm ? "1" : "0";
 		// isLoginTerm
-		featuresArr[10] = this.isLoginTerm ? "1" : "0";
+		featuresArr[11] = this.isLoginTerm ? "1" : "0";
 		// isBankTerm
-		featuresArr[11] = this.isBankTerm ? "1" : "0";
+		featuresArr[12] = this.isBankTerm ? "1" : "0";
 		// isVerifyTerm
-		featuresArr[12] = this.isVerifyTerm ? "1" : "0";
+		featuresArr[13] = this.isVerifyTerm ? "1" : "0";
 		// isAgreeTerm
-		featuresArr[13] = this.isAgreeTerm ? "1" : "0";
+		featuresArr[14] = this.isAgreeTerm ? "1" : "0";
 		// isSuspendTerm
-		featuresArr[14] = this.isSuspendTerm ? "1" : "0";
+		featuresArr[15] = this.isSuspendTerm ? "1" : "0";
 		// phishingTermsWeight
-		featuresArr[15] = String.valueOf(this.phishingTermsWeight);
+		featuresArr[16] = String.valueOf(this.phishingTermsWeight);
+		// domainSender
+		featuresArr[17] = this.domainSender ? "1" : "0";
 		// Class field
-		featuresArr[16] = this.isPhishing ? "1" : "0";
+		featuresArr[18] = this.isPhishing ? "1" : "0";
 		
 		return featuresArr;
 	}
