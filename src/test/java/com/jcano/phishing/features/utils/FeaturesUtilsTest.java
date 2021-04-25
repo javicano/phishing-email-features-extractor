@@ -10,7 +10,7 @@ import org.junit.Test;
 public class FeaturesUtilsTest {
 
     @Test
-    public void validateHasHTMLTags(){
+    public void test_hasHTMLTags_method(){
     	Assert.assertFalse(FeaturesUtils.hasHTMLTags("Hi, how are you today Regards \n"));
     	Assert.assertTrue(FeaturesUtils.hasHTMLTags("Hi, how are you today Regards <script>alert('Hei')</script>"));
     	Assert.assertTrue(FeaturesUtils.hasHTMLTags("Hi, how are you today </br> Regards"));
@@ -18,7 +18,7 @@ public class FeaturesUtilsTest {
     }
     
     @Test
-    public void validateHasURLs(){	
+    public void test_hasURLs_method(){	
     	List<String> result = FeaturesUtils.getURLs("Hi, "
     			+ "how are you today? "
     			+ "This are the links: "
@@ -35,71 +35,71 @@ public class FeaturesUtilsTest {
     }
     
     @Test
-    public void isAccountTerm(){
+    public void test_isTerm_account(){
     	String textWithAccount = "Please, add your ._ AcCount. number";
     	String textWithoutAccount = "He emphasized that accountability is not only about supply but also about demand.";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.ACCOUNT, textWithAccount));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.ACCOUNT, textWithoutAccount));
+    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.ACCOUNT_TERM, textWithAccount));
+    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.ACCOUNT_TERM, textWithoutAccount));
     }
     
     @Test
-    public void isDearTerm(){
+    public void test_isTerm_dear(){
     	String textWithDear = "Dear customer";
     	String textWithoutDear = "Deardrops is the name of the band";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.DEAR, textWithDear));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.DEAR, textWithoutDear));
+    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.DEAR_TERM, textWithDear));
+    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.DEAR_TERM, textWithoutDear));
     }
     
     @Test
-    public void isPaypalTerm(){
+    public void test_isTerm_paypal(){
     	String textWithPaypal = "Please, introduce your paypal credentials";
     	String textWithoutPaypal = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.PAYPAL, textWithPaypal));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.PAYPAL, textWithoutPaypal));
+    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.PAYPAL_TERM, textWithPaypal));
+    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.PAYPAL_TERM, textWithoutPaypal));
     }
     
     @Test
-    public void isLoginTerm(){
+    public void test_isTerm_login(){
     	String textWithLogin = "Please, access to login page";
     	String textWithoutLogin = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.LOGIN, textWithLogin));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.LOGIN, textWithoutLogin));
+    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.LOGIN_TERM, textWithLogin));
+    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.LOGIN_TERM, textWithoutLogin));
     }
     
     @Test
-    public void isBankTerm(){
+    public void test_isTerm_bank(){
     	String textWithBank = "Please, access to your bank website";
     	String textWithoutBank = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.BANK, textWithBank));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.BANK, textWithoutBank));
+    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.BANK_TERM, textWithBank));
+    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.BANK_TERM, textWithoutBank));
     }
 	
     @Test
-    public void isVerifyTerm(){
+    public void test_isTerm_verify(){
     	String textWithVerify = "Please verify your acces credentials";
     	String textWithoutVerify = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.VERIFY, textWithVerify));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.VERIFY, textWithoutVerify));
+    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.VERIFY_TERM, textWithVerify));
+    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.VERIFY_TERM, textWithoutVerify));
     }
 	
     @Test
-    public void isAgreeTerm(){
+    public void test_isTerm_agree(){
     	String textWithAgree = "Do you agree with the new condition terms?";
     	String textWithoutAgree = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.AGREE, textWithAgree));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.AGREE, textWithoutAgree));
+    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.AGREE_TERM, textWithAgree));
+    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.AGREE_TERM, textWithoutAgree));
     }
 	
     @Test
-    public void isSuspendTerm(){
+    public void test_isTerm_suspend(){
     	String textWithSuspend = "Unfortunately we are going to suspend your account";
     	String textWithoutSuspend = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.SUSPEND, textWithSuspend));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.SUSPEND, textWithoutSuspend));
+    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.SUSPEND_TERM, textWithSuspend));
+    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.SUSPEND_TERM, textWithoutSuspend));
     }
     
     @Test
-    public void numberOfIpsURLs(){
+    public void test_numberOfIpsURLs_method(){
     	String text = "http://123.168.10.1/ \n" + 
     			"http://123.168.10.2/ \n" + 
     			"http://123.168.10.3/";
@@ -107,7 +107,7 @@ public class FeaturesUtilsTest {
     }
     
     @Test
-    public void numberOfImagesAsURL(){
+    public void test_numberOfImagesAsURL_method(){
     	String text = "https://s1.pir.fm/pf/blog/articles/How-to-copy-a-web-page-link-or-URL-1800x980.png \n" + 
     			"http://s2.pir.fm/pf/blog/articles/How-to-copy-a-web-page-link-or-URL-1800x980.jpeg \n" + 
     			"http://s3.pir.fm/pf/blog/articles/How-to-copy-a-web-page-link-or-URL-1800x980.jpg \n" + 
@@ -116,12 +116,36 @@ public class FeaturesUtilsTest {
     }
     
     @Test
-    public void matchDomainSender(){
+    public void test_matchDomainSender_method(){
     	String from = "Robert Elz <kre@munnari.OZ.AU>";
     	String messageId = "<13258.1030015585@munnari.OZ.AU>";
     	Assert.assertTrue(FeaturesUtils.matchDomainSender(from, messageId));
     	from = "Robert Elz <kre@munnari.ZZ.AU>";
     	Assert.assertFalse(FeaturesUtils.matchDomainSender(from, messageId));
+    }
+    
+    @Test
+    public void test_mumberOfDomainsInUrls_method(){
+    	String email= "https://play.google.com/store/apps/details?id=com.skgames.trafficracer%22\n" +
+    			"id=com.skgames.trafficracer%22\n" +
+    			"http://mplay.google.co.in/sadfask/asdkfals?dk=10 \n" + 
+    			"http://lplay.google.co.in/sadfask/asdkfals?dk=10\n" + 
+    			"http://play.google.co.in/sadfask/asdkfals?dk=10\n" + 
+    			"http://play.google.co.in/sadfask/asdkfals?dk=10\n" + 
+    			"http://www.google.co.in/sadfask/asdkfals?dk=10\n";
+    	Assert.assertEquals(FeaturesUtils.numberOfDomainsInUrls(email), 5);
+    }
+    
+    @Test
+    public void test_maxNumberOfDotsInUrl_method(){
+    	String email= "https://play.google.com/store/apps/details?id=com.skgames.trafficracer%22\n" +
+    			"id=com.skgames.trafficracer%22\n" +
+    			"http://mplay.google.co.in.es.com.tv/sadfask/asdkfals?dk=10 \n" + 
+    			"http://lplay.google.co.in/sadfask/asdkfals?dk=10\n" + 
+    			"http://play.google.co.in/sadfask/asdkfals?dk=10\n" + 
+    			"http://play.google.co.in/sadfask/asdkfals?dk=10\n" + 
+    			"http://www.google.co.in/sadfask/asdkfals?dk=10\n";
+    	Assert.assertEquals(FeaturesUtils.maxNumberOfDotsInUrl(email), 6);
     }
 
 }

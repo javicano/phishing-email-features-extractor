@@ -1,8 +1,8 @@
-package com.jcano.phishing.features;
+package com.jcano.phishing.features.model;
 
 public class Features {
 	
-	private final static int NUMBER_OF_ATTRIBUTES = 19;
+	private final static int NUMBER_OF_ATTRIBUTES = 18;
 	
 	/**
 	 * Checks if the email body contains HTML content.
@@ -24,11 +24,6 @@ public class Features {
 	 * The number of domains in the URLs that exists in the email.
 	 */
 	private int domainsCount;
-	
-	/**
-	 * The number of URLs whose label is different from its anchor in the email.
-	 */
-	private int textLinkDifference;
 	
 	/**
 	 * The maximum number of dots that exist in a URL in the email.
@@ -132,14 +127,6 @@ public class Features {
 
 	public void setDomainsCount(int domainsCount) {
 		this.domainsCount = domainsCount;
-	}
-
-	public int getTextLinkDifference() {
-		return textLinkDifference;
-	}
-
-	public void setTextLinkDifference(int textLinkDifference) {
-		this.textLinkDifference = textLinkDifference;
 	}
 
 	public int getDotsCount() {
@@ -260,21 +247,20 @@ public class Features {
 		fieldNames[1] = "scriptTag";
 		fieldNames[2] = "hexadecimalURLs";
 		fieldNames[3] = "domainsCount";
-		fieldNames[4] = "textLinkDifference";
-		fieldNames[5] = "dotsCount";
-		fieldNames[6] = "isAccountTerm";
-		fieldNames[7] = "isDearTeam";
-		fieldNames[8] = "imagesAsURL";
-		fieldNames[9] = "ipUrls";
-		fieldNames[10] = "isPayPalTerm";
-		fieldNames[11] = "isLoginTerm";
-		fieldNames[12] = "isBankTerm";
-		fieldNames[13] = "isVerifyTerm";
-		fieldNames[14] = "isAgreeTerm";
-		fieldNames[15] = "isSuspendTerm";
-		fieldNames[16] = "phishingTermsWeight";
-		fieldNames[17] = "domainSender";
-		fieldNames[18] = "isPhishing";
+		fieldNames[4] = "dotsCount";
+		fieldNames[5] = "isAccountTerm";
+		fieldNames[6] = "isDearTeam";
+		fieldNames[7] = "imagesAsURL";
+		fieldNames[8] = "ipUrls";
+		fieldNames[9] = "isPayPalTerm";
+		fieldNames[10] = "isLoginTerm";
+		fieldNames[11] = "isBankTerm";
+		fieldNames[12] = "isVerifyTerm";
+		fieldNames[13] = "isAgreeTerm";
+		fieldNames[14] = "isSuspendTerm";
+		fieldNames[15] = "phishingTermsWeight";
+		fieldNames[16] = "domainSender";
+		fieldNames[17] = "isPhishing";
 		return fieldNames;
 	}
 	
@@ -288,36 +274,34 @@ public class Features {
 		featuresArr[2] = String.valueOf(this.hexadecimalURLs);
 		// domainsCount
 		featuresArr[3] = String.valueOf(this.domainsCount);
-		// textLinkDifference
-		featuresArr[4] = String.valueOf(this.textLinkDifference);
 		// dotsCount
-		featuresArr[5] = String.valueOf(this.dotsCount);
+		featuresArr[4] = String.valueOf(this.dotsCount);
 		// isAccountTerm
-		featuresArr[6] = this.isAccountTerm ? "1" : "0";
+		featuresArr[5] = this.isAccountTerm ? "1" : "0";
 		// isDearTeam
-		featuresArr[7] = this.isDearTeam ? "1" : "0";
+		featuresArr[6] = this.isDearTeam ? "1" : "0";
 		// imagesAsURL
-		featuresArr[8] = String.valueOf(this.imagesAsURL);
+		featuresArr[7] = String.valueOf(this.imagesAsURL);
 		// ipUrls
-		featuresArr[9] = String.valueOf(this.ipUrls);
+		featuresArr[8] = String.valueOf(this.ipUrls);
 		// isPayPalTerm
-		featuresArr[10] = this.isPayPalTerm ? "1" : "0";
+		featuresArr[9] = this.isPayPalTerm ? "1" : "0";
 		// isLoginTerm
-		featuresArr[11] = this.isLoginTerm ? "1" : "0";
+		featuresArr[10] = this.isLoginTerm ? "1" : "0";
 		// isBankTerm
-		featuresArr[12] = this.isBankTerm ? "1" : "0";
+		featuresArr[11] = this.isBankTerm ? "1" : "0";
 		// isVerifyTerm
-		featuresArr[13] = this.isVerifyTerm ? "1" : "0";
+		featuresArr[12] = this.isVerifyTerm ? "1" : "0";
 		// isAgreeTerm
-		featuresArr[14] = this.isAgreeTerm ? "1" : "0";
+		featuresArr[13] = this.isAgreeTerm ? "1" : "0";
 		// isSuspendTerm
-		featuresArr[15] = this.isSuspendTerm ? "1" : "0";
+		featuresArr[14] = this.isSuspendTerm ? "1" : "0";
 		// phishingTermsWeight
-		featuresArr[16] = String.valueOf(this.phishingTermsWeight);
+		featuresArr[15] = String.valueOf(this.phishingTermsWeight);
 		// domainSender
-		featuresArr[17] = this.domainSender ? "1" : "0";
+		featuresArr[16] = this.domainSender ? "1" : "0";
 		// Class field
-		featuresArr[18] = this.isPhishing ? "1" : "0";
+		featuresArr[17] = this.isPhishing ? "1" : "0";
 		
 		return featuresArr;
 	}

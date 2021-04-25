@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.apache.james.mime4j.MimeException;
 
-import com.jcano.phishing.features.Features;
+import com.jcano.phishing.features.model.Features;
 import com.jcano.phishing.features.parser.EmailParser;
 
 public class FilesReader {

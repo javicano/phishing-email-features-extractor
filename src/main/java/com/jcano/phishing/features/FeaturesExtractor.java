@@ -33,18 +33,13 @@ public class FeaturesExtractor {
 		try {
 			loadConfiguration();
 			
-			// EmailParser phishingEmailParser = new EmailParser(phishingCollectionPath);
-			// phishingEmailParser.getEmailFeaturesCollection();
-			
 			FilesReader filesReader = new FilesReader();
 			filesReader.readCollection(hamColllectionPath, false);
 			filesReader.readCollection(phishingCollectionPath, true);
 			List<String[]> hamDataRows = filesReader.getDataRows();		
 			
 			FileWriter fileWriter = new FileWriter();
-			fileWriter.generateCSVfile(hamDataRows, outputDirectory, "output");
-			
-			
+			fileWriter.generateCSVfile(hamDataRows, outputDirectory, "email_features_output");
 			
 		} catch (Exception e) {
 			// TODO: handle exception

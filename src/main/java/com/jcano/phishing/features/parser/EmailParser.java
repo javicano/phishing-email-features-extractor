@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.apache.james.mime4j.MimeException;
 import org.apache.james.mime4j.parser.MimeStreamParser;
 
-import com.jcano.phishing.features.Features;
+import com.jcano.phishing.features.model.Features;
 
 public class EmailParser extends MimeStreamParser {
 	

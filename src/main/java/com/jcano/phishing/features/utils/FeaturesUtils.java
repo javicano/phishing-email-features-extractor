@@ -1,13 +1,19 @@
 package com.jcano.phishing.features.utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FeaturesUtils {
 	
+	private static final Pattern EMAIL_DOMAIN_PATTERN = Pattern.compile("(?<=@)[a-zA-Z0-9\\.]+(?<=)");
+	
 	private static final String HTML_PATTERN = "<(\"[^\"]*\"|'[^']*'|[^'\">])*>";
+	
+	private static final Pattern IP_PATTERN = Pattern.compile("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
 	
 	private static final String SCRIPT_PATTERN = "<script[\\s\\S]*?>[\\s\\S]*?<\\/script>";
 	
@@ -18,27 +24,25 @@ public class FeaturesUtils {
 		                + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
 		        Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	
-	private static final Pattern IP_PATTERN = Pattern.compile("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b");
+	private static final Pattern URL_DOMAIN_PATTERN = Pattern.compile("(https?://)([^:^/]*)(:\\\\d*)?(.*)?");
 	
-	private static final Pattern URL_IMAGES = Pattern.compile("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)(.jpeg|.jpg|.png|.tif|.tiff|.bmp|.gif|.eps|.raw)");
+	private static final Pattern URL_IMAGES_PATTERM = Pattern.compile("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)(.jpeg|.jpg|.png|.tif|.tiff|.bmp|.gif|.eps|.raw)");
 	
-	private static final Pattern EMAIL_DOMAIN = Pattern.compile("(?<=@)[a-zA-Z0-9\\.]+(?<=)");
+	public static final String ACCOUNT_TERM = "account";
 	
-	public static final String ACCOUNT = "account";
+	public static final String AGREE_TERM = "agree";
 	
-	public static final String DEAR = "dear";
+	public static final String BANK_TERM = "bank";
 	
-	public static final String PAYPAL = "paypal";
+	public static final String DEAR_TERM = "dear";
 	
-	public static final String LOGIN = "login";
+	public static final String LOGIN_TERM = "login";
 	
-	public static final String BANK = "bank";
+	public static final String PAYPAL_TERM = "paypal";
 	
-	public static final String VERIFY = "verify";
+	public static final String SUSPEND_TERM = "suspend";
 	
-	public static final String AGREE = "agree";
-	
-	public static final String SUSPEND = "suspend";
+	public static final String VERIFY_TERM = "verify";
 	
 	public static boolean hasHTMLTags(String email){
 		Pattern pattern = Pattern.compile(HTML_PATTERN);
@@ -66,7 +70,7 @@ public class FeaturesUtils {
 		return urls;
 	}
 	
-	public static int getNumberOfUrlsWithHexaChars(List<String> urls) {
+	public static int numberOfUrlsWithHexaChars(List<String> urls) {
 		String [] hexaChars = {"24","26","2C","2F","3A","3B","3D","3F","40","20","22","3C","3E","23","25","7B","7D","7C","5C","5E","7E","5B","5D","60"}; 
 		int counter = 0;
 		for(String url: urls) {
@@ -87,7 +91,7 @@ public class FeaturesUtils {
 	}
 	
 	public static int numberOfImageAsURL(String email){
-		Matcher matcher = URL_IMAGES.matcher(email.toLowerCase());
+		Matcher matcher = URL_IMAGES_PATTERM.matcher(email.toLowerCase());
 		return matcher.results().toArray().length;
 	}
 		
@@ -100,8 +104,8 @@ public class FeaturesUtils {
 	public static boolean matchDomainSender(String from, String messageId){
 		boolean result = false;
 		if(from != null && !from.equalsIgnoreCase("") && messageId != null && !messageId.equalsIgnoreCase("")) {
-			Matcher fromMatcher = EMAIL_DOMAIN.matcher(from);
-			Matcher messageIdMatcher = EMAIL_DOMAIN.matcher(messageId);
+			Matcher fromMatcher = EMAIL_DOMAIN_PATTERN.matcher(from);
+			Matcher messageIdMatcher = EMAIL_DOMAIN_PATTERN.matcher(messageId);
 			if (fromMatcher.find() && messageIdMatcher.find()){
 				String fromDomain = fromMatcher.group();
 				String messageIdDomain = messageIdMatcher.group();
@@ -118,6 +122,30 @@ public class FeaturesUtils {
 		}
 		return result;
 		
+	}
+	
+	public static int numberOfDomainsInUrls(String email) {
+		Matcher urlDomainsMatcher = URL_DOMAIN_PATTERN.matcher(email);
+		LinkedHashSet<String> hashSet = new LinkedHashSet<String>();
+		while (urlDomainsMatcher.find()) {
+			hashSet.add(urlDomainsMatcher.group(2));
+		}
+		return hashSet.size();
+	}
+	
+	public static int maxNumberOfDotsInUrl(String email) {
+		Matcher urlDomainsMatcher = URL_DOMAIN_PATTERN.matcher(email);
+		List<Integer> numberOfDots = new ArrayList<Integer>();
+		int count = 0;
+		while (urlDomainsMatcher.find()) {
+			String url = urlDomainsMatcher.group(2);
+			numberOfDots.add(url.length() - url.replaceAll("[.]+", "").length());
+		}
+		if(numberOfDots.size() > 0) {
+			Collections.sort(numberOfDots);
+			count = numberOfDots.get(numberOfDots.size() - 1);
+		}
+		return count;
 	}
 
 }

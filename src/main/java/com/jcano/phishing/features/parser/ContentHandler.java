@@ -12,7 +12,7 @@ import org.apache.james.mime4j.parser.AbstractContentHandler;
 import org.apache.james.mime4j.stream.BodyDescriptor;
 import org.apache.james.mime4j.stream.Field;
 
-import com.jcano.phishing.features.Features;
+import com.jcano.phishing.features.model.Features;
 import com.jcano.phishing.features.utils.FeaturesUtils;
 
 public class ContentHandler extends AbstractContentHandler {
@@ -49,18 +49,18 @@ public class ContentHandler extends AbstractContentHandler {
         	        .collect(Collectors.joining("\n"));
         features.setHtmlBody(FeaturesUtils.hasHTMLTags(bodyStr));
         features.setScriptTag(FeaturesUtils.hasScriptTag(bodyStr));
-        features.setHexadecimalURLs(FeaturesUtils.getNumberOfUrlsWithHexaChars(FeaturesUtils.getURLs(bodyStr)));
-        features.setAccountTerm(FeaturesUtils.isTerm(FeaturesUtils.ACCOUNT, bodyStr));
-        features.setAgreeTerm(FeaturesUtils.isTerm(FeaturesUtils.AGREE, bodyStr));
-        features.setDearTeam(FeaturesUtils.isTerm(FeaturesUtils.DEAR, bodyStr));
-        features.setDomainsCount(0);
-        features.setDotsCount(0);
+        features.setHexadecimalURLs(FeaturesUtils.numberOfUrlsWithHexaChars(FeaturesUtils.getURLs(bodyStr)));
+        features.setAccountTerm(FeaturesUtils.isTerm(FeaturesUtils.ACCOUNT_TERM, bodyStr));
+        features.setAgreeTerm(FeaturesUtils.isTerm(FeaturesUtils.AGREE_TERM, bodyStr));
+        features.setDearTeam(FeaturesUtils.isTerm(FeaturesUtils.DEAR_TERM, bodyStr));
+        features.setDomainsCount(FeaturesUtils.numberOfDomainsInUrls(bodyStr));
+        features.setDotsCount(FeaturesUtils.maxNumberOfDotsInUrl(bodyStr));
         features.setImagesAsURL(FeaturesUtils.numberOfImageAsURL(bodyStr));
-        features.setLoginTerm(FeaturesUtils.isTerm(FeaturesUtils.LOGIN, bodyStr));
-        features.setPayPalTerm(FeaturesUtils.isTerm(FeaturesUtils.PAYPAL, bodyStr));
+        features.setLoginTerm(FeaturesUtils.isTerm(FeaturesUtils.LOGIN_TERM, bodyStr));
+        features.setPayPalTerm(FeaturesUtils.isTerm(FeaturesUtils.PAYPAL_TERM, bodyStr));
         features.setPhishingTermsWeight(10);
-        features.setSuspendTerm(FeaturesUtils.isTerm(FeaturesUtils.SUSPEND, bodyStr));
-        features.setVerifyTerm(FeaturesUtils.isTerm(FeaturesUtils.VERIFY, bodyStr));
+        features.setSuspendTerm(FeaturesUtils.isTerm(FeaturesUtils.SUSPEND_TERM, bodyStr));
+        features.setVerifyTerm(FeaturesUtils.isTerm(FeaturesUtils.VERIFY_TERM, bodyStr));
     }
     
 	public Features getFeatures() {
