@@ -1,0 +1,11 @@
+# Vendored files and directories are excluded from language
+# statistics.
+
+# Output
+- (^|/)output/
+
+# Target
+- (^|/)target/
+
+# Collections
+- (^|/)collections/
