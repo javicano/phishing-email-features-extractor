@@ -6,6 +6,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.jcano.phishing.features.model.PhishingTerms;
+
 
 public class FeaturesUtilsTest {
 
@@ -38,64 +40,64 @@ public class FeaturesUtilsTest {
     public void test_isTerm_account(){
     	String textWithAccount = "Please, add your ._ AcCount. number";
     	String textWithoutAccount = "He emphasized that accountability is not only about supply but also about demand.";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.ACCOUNT_TERM, textWithAccount));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.ACCOUNT_TERM, textWithoutAccount));
+    	Assert.assertTrue(FeaturesUtils.isTerm(PhishingTerms.ACCOUNT_TERM, textWithAccount));
+    	Assert.assertFalse(FeaturesUtils.isTerm(PhishingTerms.ACCOUNT_TERM, textWithoutAccount));
     }
     
     @Test
     public void test_isTerm_dear(){
     	String textWithDear = "Dear customer";
     	String textWithoutDear = "Deardrops is the name of the band";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.DEAR_TERM, textWithDear));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.DEAR_TERM, textWithoutDear));
+    	Assert.assertTrue(FeaturesUtils.isTerm(PhishingTerms.DEAR_TERM, textWithDear));
+    	Assert.assertFalse(FeaturesUtils.isTerm(PhishingTerms.DEAR_TERM, textWithoutDear));
     }
     
     @Test
     public void test_isTerm_paypal(){
     	String textWithPaypal = "Please, introduce your paypal credentials";
     	String textWithoutPaypal = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.PAYPAL_TERM, textWithPaypal));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.PAYPAL_TERM, textWithoutPaypal));
+    	Assert.assertTrue(FeaturesUtils.isTerm(PhishingTerms.PAYPAL_TERM, textWithPaypal));
+    	Assert.assertFalse(FeaturesUtils.isTerm(PhishingTerms.PAYPAL_TERM, textWithoutPaypal));
     }
     
     @Test
     public void test_isTerm_login(){
     	String textWithLogin = "Please, access to login page";
     	String textWithoutLogin = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.LOGIN_TERM, textWithLogin));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.LOGIN_TERM, textWithoutLogin));
+    	Assert.assertTrue(FeaturesUtils.isTerm(PhishingTerms.LOGIN_TERM, textWithLogin));
+    	Assert.assertFalse(FeaturesUtils.isTerm(PhishingTerms.LOGIN_TERM, textWithoutLogin));
     }
     
     @Test
     public void test_isTerm_bank(){
     	String textWithBank = "Please, access to your bank website";
     	String textWithoutBank = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.BANK_TERM, textWithBank));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.BANK_TERM, textWithoutBank));
+    	Assert.assertTrue(FeaturesUtils.isTerm(PhishingTerms.BANK_TERM, textWithBank));
+    	Assert.assertFalse(FeaturesUtils.isTerm(PhishingTerms.BANK_TERM, textWithoutBank));
     }
 	
     @Test
     public void test_isTerm_verify(){
     	String textWithVerify = "Please verify your acces credentials";
     	String textWithoutVerify = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.VERIFY_TERM, textWithVerify));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.VERIFY_TERM, textWithoutVerify));
+    	Assert.assertTrue(FeaturesUtils.isTerm(PhishingTerms.VERIFY_TERM, textWithVerify));
+    	Assert.assertFalse(FeaturesUtils.isTerm(PhishingTerms.VERIFY_TERM, textWithoutVerify));
     }
 	
     @Test
     public void test_isTerm_agree(){
     	String textWithAgree = "Do you agree with the new condition terms?";
     	String textWithoutAgree = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.AGREE_TERM, textWithAgree));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.AGREE_TERM, textWithoutAgree));
+    	Assert.assertTrue(FeaturesUtils.isTerm(PhishingTerms.AGREE_TERM, textWithAgree));
+    	Assert.assertFalse(FeaturesUtils.isTerm(PhishingTerms.AGREE_TERM, textWithoutAgree));
     }
 	
     @Test
     public void test_isTerm_suspend(){
     	String textWithSuspend = "Unfortunately we are going to suspend your account";
     	String textWithoutSuspend = "Just for testing purpose";
-    	Assert.assertTrue(FeaturesUtils.isTerm(FeaturesUtils.SUSPEND_TERM, textWithSuspend));
-    	Assert.assertFalse(FeaturesUtils.isTerm(FeaturesUtils.SUSPEND_TERM, textWithoutSuspend));
+    	Assert.assertTrue(FeaturesUtils.isTerm(PhishingTerms.SUSPEND_TERM, textWithSuspend));
+    	Assert.assertFalse(FeaturesUtils.isTerm(PhishingTerms.SUSPEND_TERM, textWithoutSuspend));
     }
     
     @Test

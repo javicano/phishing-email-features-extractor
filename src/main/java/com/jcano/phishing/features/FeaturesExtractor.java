@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import com.jcano.phishing.features.io.FileWriter;
 import com.jcano.phishing.features.io.FilesReader;
+import com.jcano.phishing.features.model.PhishingTermsFrequency;
 
 /**
  * Phishing email classifier
@@ -33,13 +34,25 @@ public class FeaturesExtractor {
 		try {
 			loadConfiguration();
 			
-			FilesReader filesReader = new FilesReader();
-			filesReader.readCollection(hamColllectionPath, false);
-			filesReader.readCollection(phishingCollectionPath, true);
-			List<String[]> hamDataRows = filesReader.getDataRows();		
+			FilesReader filesReader = new FilesReader(false);
+			filesReader.readCollection(hamColllectionPath);
+			System.out.println("Ham Terms Report");
+			System.out.println("----------------------------");
+			PhishingTermsFrequency phishingTermsFrequency = filesReader.getPhishingTermsFrequency();
+			phishingTermsFrequency.getPhishingTermsFrequency();
+			List<String[]> dataRows = filesReader.getDataRows();	
+			
+			filesReader = new FilesReader(true);
+			filesReader.readCollection(phishingCollectionPath);
+			System.out.println("Phishing Terms Report");
+			System.out.println("----------------------------");
+			phishingTermsFrequency = filesReader.getPhishingTermsFrequency();
+			phishingTermsFrequency.getPhishingTermsFrequency();
+			
+			dataRows.addAll(filesReader.getDataRows());
 			
 			FileWriter fileWriter = new FileWriter();
-			fileWriter.generateCSVfile(hamDataRows, outputDirectory, "email_features_output");
+			fileWriter.generateCSVfile(dataRows, outputDirectory, "email_features_output");
 			
 		} catch (Exception e) {
 			// TODO: handle exception

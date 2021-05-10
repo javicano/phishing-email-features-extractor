@@ -28,21 +28,7 @@ public class FeaturesUtils {
 	
 	private static final Pattern URL_IMAGES_PATTERM = Pattern.compile("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)(.jpeg|.jpg|.png|.tif|.tiff|.bmp|.gif|.eps|.raw)");
 	
-	public static final String ACCOUNT_TERM = "account";
-	
-	public static final String AGREE_TERM = "agree";
-	
-	public static final String BANK_TERM = "bank";
-	
-	public static final String DEAR_TERM = "dear";
-	
-	public static final String LOGIN_TERM = "login";
-	
-	public static final String PAYPAL_TERM = "paypal";
-	
-	public static final String SUSPEND_TERM = "suspend";
-	
-	public static final String VERIFY_TERM = "verify";
+
 	
 	public static boolean hasHTMLTags(String email){
 		Pattern pattern = Pattern.compile(HTML_PATTERN);

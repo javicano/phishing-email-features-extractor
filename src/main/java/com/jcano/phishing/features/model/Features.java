@@ -1,14 +1,15 @@
 package com.jcano.phishing.features.model;
 
-public class Features {
+public class Features extends PhishingTerms {
 	
 	private final static int NUMBER_OF_ATTRIBUTES = 18;
+	
+	
 	
 	/**
 	 * Checks if the email body contains HTML content.
 	 */
 	private boolean htmlBody;
-	
 	
 	/**
 	 * Checks if the email body contains javascript script tag.
@@ -30,15 +31,6 @@ public class Features {
 	 */
 	private int dotsCount;
 	
-	/**
-	 * Checks if the email contains the term “Account”
-	 */
-	private boolean isAccountTerm;
-	
-	/**
-	 * Checks if the email contains the term “Dear”
-	 */
-	private boolean isDearTeam;
 	
 	/**
 	 * The number of image URLs.
@@ -50,52 +42,25 @@ public class Features {
 	 */
 	private int ipUrls;
 	
-	/**
-	 * Checks if the email contains the term “PayPal”
-	 */
-	private boolean isPayPalTerm;
 	
 	/**
-	 * Checks if the email contains the term “Login”
+	 * A weight that is assigned to each email and represents
+	 * the sum of weights of the phishing terms that exists in that email
 	 */
-	private boolean isLoginTerm;
+	private double phishingTermsWeight;
 	
 	/**
-	 * Checks if the email contains the term “Bank”
+	 * 
 	 */
-	private boolean isBankTerm;
+	private boolean domainSender;
 	
-	
-	/**
-	 * Checks if the email contains the term “Verify”
-	 */
-	private boolean isVerifyTerm;
-	
-	/**
-	 * Checks if the email contains the term “Agree”
-	 */
-	private boolean isAgreeTerm;
-	
-	/**
-	 * Checks if the email contains the term “Suspend”
-	 */
-	private boolean isSuspendTerm;
 	
 	/**
 	 * Class attribute
 	 */
 	private boolean isPhishing;
 	
-	/**
-	 * A weight that is assigned to each email and represents
-	 * the sum of weights of the phishing terms that exists in that email
-	 */
-	private int phishingTermsWeight;
-	
-	/**
-	 * 
-	 */
-	private boolean domainSender;
+
 
 	public boolean isHtmlBody() {
 		return htmlBody;
@@ -137,22 +102,6 @@ public class Features {
 		this.dotsCount = dotsCount;
 	}
 
-	public boolean isAccountTerm() {
-		return isAccountTerm;
-	}
-
-	public void setAccountTerm(boolean isAccountTerm) {
-		this.isAccountTerm = isAccountTerm;
-	}
-
-	public boolean isDearTeam() {
-		return isDearTeam;
-	}
-
-	public void setDearTeam(boolean isDearTeam) {
-		this.isDearTeam = isDearTeam;
-	}
-
 	public int getImagesAsURL() {
 		return imagesAsURL;
 	}
@@ -169,59 +118,11 @@ public class Features {
 		this.ipUrls = ipUrls;
 	}
 
-	public boolean isPayPalTerm() {
-		return isPayPalTerm;
-	}
-
-	public void setPayPalTerm(boolean isPayPalTerm) {
-		this.isPayPalTerm = isPayPalTerm;
-	}
-
-	public boolean isLoginTerm() {
-		return isLoginTerm;
-	}
-
-	public void setLoginTerm(boolean isLoginTerm) {
-		this.isLoginTerm = isLoginTerm;
-	}
-
-	public boolean isBankTerm() {
-		return isBankTerm;
-	}
-
-	public void setBankTerm(boolean isBankTerm) {
-		this.isBankTerm = isBankTerm;
-	}
-
-	public boolean isVerifyTerm() {
-		return isVerifyTerm;
-	}
-
-	public void setVerifyTerm(boolean isVerifyTerm) {
-		this.isVerifyTerm = isVerifyTerm;
-	}
-
-	public boolean isAgreeTerm() {
-		return isAgreeTerm;
-	}
-
-	public void setAgreeTerm(boolean isAgreeTerm) {
-		this.isAgreeTerm = isAgreeTerm;
-	}
-
-	public boolean isSuspendTerm() {
-		return isSuspendTerm;
-	}
-
-	public void setSuspendTerm(boolean isSuspendTerm) {
-		this.isSuspendTerm = isSuspendTerm;
-	}
-
-	public int getPhishingTermsWeight() {
+	public double getPhishingTermsWeight() {
 		return phishingTermsWeight;
 	}
 
-	public void setPhishingTermsWeight(int phishingTermsWeight) {
+	public void setPhishingTermsWeight(double phishingTermsWeight) {
 		this.phishingTermsWeight = phishingTermsWeight;
 	}
 	
@@ -267,9 +168,9 @@ public class Features {
 	public String[] toArray() {
 		String[] featuresArr = new String[NUMBER_OF_ATTRIBUTES];
 		// htmlBody
-		featuresArr[0] = this.htmlBody ? "1" : "0";
+		featuresArr[0] = this.htmlBody ? "True" : "False";
 		// scriptTag
-		featuresArr[1] = this.scriptTag ? "1" : "0";
+		featuresArr[1] = this.scriptTag ? "True" : "False";
 		// hexadecimalURLs
 		featuresArr[2] = String.valueOf(this.hexadecimalURLs);
 		// domainsCount
@@ -277,31 +178,31 @@ public class Features {
 		// dotsCount
 		featuresArr[4] = String.valueOf(this.dotsCount);
 		// isAccountTerm
-		featuresArr[5] = this.isAccountTerm ? "1" : "0";
+		featuresArr[5] = this.isAccountTerm() ? "True" : "False";
 		// isDearTeam
-		featuresArr[6] = this.isDearTeam ? "1" : "0";
+		featuresArr[6] = this.isDearTerm() ? "True" : "False";
 		// imagesAsURL
 		featuresArr[7] = String.valueOf(this.imagesAsURL);
 		// ipUrls
 		featuresArr[8] = String.valueOf(this.ipUrls);
 		// isPayPalTerm
-		featuresArr[9] = this.isPayPalTerm ? "1" : "0";
+		featuresArr[9] = this.isPayPalTerm() ? "True" : "False";
 		// isLoginTerm
-		featuresArr[10] = this.isLoginTerm ? "1" : "0";
+		featuresArr[10] = this.isLoginTerm() ? "True" : "False";
 		// isBankTerm
-		featuresArr[11] = this.isBankTerm ? "1" : "0";
+		featuresArr[11] = this.isBankTerm() ? "True" : "False";
 		// isVerifyTerm
-		featuresArr[12] = this.isVerifyTerm ? "1" : "0";
+		featuresArr[12] = this.isVerifyTerm() ? "True" : "False";
 		// isAgreeTerm
-		featuresArr[13] = this.isAgreeTerm ? "1" : "0";
+		featuresArr[13] = this.isAgreeTerm() ? "True" : "False";
 		// isSuspendTerm
-		featuresArr[14] = this.isSuspendTerm ? "1" : "0";
+		featuresArr[14] = this.isSuspendTerm() ? "True" : "False";
 		// phishingTermsWeight
 		featuresArr[15] = String.valueOf(this.phishingTermsWeight);
 		// domainSender
-		featuresArr[16] = this.domainSender ? "1" : "0";
+		featuresArr[16] = this.domainSender ? "True" : "False";
 		// Class field
-		featuresArr[17] = this.isPhishing ? "1" : "0";
+		featuresArr[17] = this.isPhishing ? "True" : "False";
 		
 		return featuresArr;
 	}
